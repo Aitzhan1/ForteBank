@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Weather";
+}
+
+<h2>Погода</h2>
+
+<div class="col-md-12">
+    Город: <span data-bind="text:name"></span><br/>
+    Температура: <span data-bind="text:main.temp">C</span>&deg;
+</div>
+<script>
+    var weather = Object();
+    $(document).ready(function () {
+        $.get("@Url.Action("GetWeather","Home")", function (response) {
+            weather = ko.mapping.fromJS(response);
+            ko.applyBindings(weather);
+            });
+    });
+</script>
